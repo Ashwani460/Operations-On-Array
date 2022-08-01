@@ -1,0 +1,66 @@
+#include <iostream>
+
+using namespace std;
+
+struct array{
+    int A[10];
+    int size;
+    int length;
+};
+void display(struct array arr)
+{
+    cout<<endl<<"Elements are"<<endl;
+    for(int i=0;i<arr.length;i++)
+        cout<<arr.A[i];
+}
+void append(struct array *arr, int x)
+{
+    int i;
+    if(arr->length<10)
+    {
+        arr->A[arr->length++]=x;
+    }
+}
+void insert(struct array *arr,int ind, int y)
+{
+    if(ind>0 && ind <= arr->length)
+    {
+        for(int i=arr->length;i>ind;i--)
+           arr->A[i]=arr->A[i-1];
+        arr->A[ind]=y;
+        arr->length++;
+    }
+}
+int delt(struct array *arr,int ind1)
+{   
+    int z=0;
+    if(ind1>0 && ind1<=arr->length)
+    {   
+        z=arr->A[ind1];
+        for(int i=ind1;i<=arr->length;i++)
+            arr->A[i]=arr->A[i+1];
+        arr->length--;
+        return z;
+    }
+    return 0;
+}
+int main()
+{
+    struct array arr;
+    int n;
+    cout<<"Enter the No of Elements"<<endl;
+    cin>>n;
+    cout<<"Enter the elements"<<endl;
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr.A[i];
+    }
+    arr.length=n;
+    
+    append(&arr,9);
+    insert(&arr,3,15);
+    delt(&arr,2);
+    display(arr);
+    
+    return 0;
+}
